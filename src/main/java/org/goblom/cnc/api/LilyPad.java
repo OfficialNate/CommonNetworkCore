@@ -20,7 +20,7 @@ import org.goblom.cnc.CNC;
  * @author Goblom
  */
 public class LilyPad {
-    private static Connect lilyPadConnect;
+    private static Connect connect;
     private static CNC plugin;
     private static boolean returnStatus = true;
     
@@ -28,17 +28,17 @@ public class LilyPad {
         this.plugin = plugin;
     }
     
-    public static boolean getLilyPadConnect() {
-        if (lilyPadConnect == null) {
-            lilyPadConnect = (Connect) plugin.getServer().getServicesManager().getRegistration(Connect.class).getProvider();
+    public static boolean getConnect() {
+        if (connect == null) {
+            connect = (Connect) plugin.getServer().getServicesManager().getRegistration(Connect.class).getProvider();
         }
-        return (lilyPadConnect != null);
+        return (connect != null);
     }
 
-    public static boolean connectToLilyPadServer(final Player player, String server) {
-        if (getLilyPadConnect()) {
+    public static boolean connect(final Player player, String server) {
+        if (getConnect()) {
             try {
-                Connect conn = lilyPadConnect;
+                Connect conn = connect;
 
                 conn.request(new RedirectRequest(server, player.getName())).registerListener(
                         new FutureResultListener<RedirectResult>() {
