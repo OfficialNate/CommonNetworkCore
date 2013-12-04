@@ -28,4 +28,8 @@ public class CNC extends JavaPlugin {
     public MessageManager getMessageManager() {
         return messageManager;
     }
+    
+    public PluginMessageListenerRegistration getBungeeCordChannelListener() {
+        return pmlr;
+    }
 }
