@@ -1,0 +1,4 @@
+main: org.goblom.cnc.CNC
+name: Common Network Core
+version: 0.0.1 Alpha
+author: Goblom
