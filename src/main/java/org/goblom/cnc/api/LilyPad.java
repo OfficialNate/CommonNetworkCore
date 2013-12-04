@@ -36,6 +36,7 @@ public class LilyPad {
     }
 
     public static boolean connect(final Player player, String server) {
+        returnStatus = true;
         if (getConnect()) {
             try {
                 Connect conn = connect;
@@ -61,6 +62,25 @@ public class LilyPad {
             returnStatus = false;
             plugin.getMessageManager().sendMessage(player, ChatColor.RED + "LilyPad was not found on this server. Unable to connect to different LilyPad server");
         }
+        return returnStatus;
+    }
+    
+    public static boolean send(final String player, String server) {
+        returnStatus = true;
+        if (getConnect()) {
+            try {
+                Connect conn = connect;
+                
+                conn.request(new RedirectRequest(server, player)).registerListener(
+                    new FutureResultListener<RedirectResult>() {
+                        @Override
+                        public void onResult(RedirectResult result) {
+                            returnStatus = result.getStatusCode().equals(StatusCode.SUCCESS);
+                        }
+                    }
+                );
+            } catch (RequestException e) { returnStatus = false; }
+        } else returnStatus = false;
         return returnStatus;
     }
 }
