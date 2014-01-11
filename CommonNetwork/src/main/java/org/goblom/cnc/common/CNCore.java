@@ -27,6 +27,7 @@ import org.goblom.cnc.core.permissions.RankManager;
 public class CNCore extends JavaPlugin implements CommonNetwork {
 
     private final RankManager rankManager = new CNRankManager();
+    private final Network net = new CNBungeeCord();
     
     public RankManager getRankManager() {
         return rankManager;
@@ -63,7 +64,7 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
     }
     
     public Network getNetwork() {
-        return new CNBungeeCord(); //Only support BungeeCord for now
+        return net; //Only support BungeeCord for now
     }
 
     public String getVersion() {
