@@ -16,14 +16,17 @@ import org.goblom.cnc.core.permissions.Rank;
  */
 public class CNDefaultRank implements Rank {
 
+    @Override
     public String getName() {
         return "Default";
     }
 
+    @Override
     public List<String> getPermissions() {
         return new ArrayList();
     }
 
+    @Override
     public List<Rank> getInheritance() {
         return new ArrayList();
     }

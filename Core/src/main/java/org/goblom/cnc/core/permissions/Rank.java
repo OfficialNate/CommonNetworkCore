@@ -7,7 +7,6 @@
 package org.goblom.cnc.core.permissions;
 
 import java.util.List;
-import org.bukkit.permissions.Permission;
 
 /**
  *
