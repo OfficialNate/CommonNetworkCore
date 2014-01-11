@@ -4,7 +4,7 @@
  * All Rights Reserved unless otherwise explicitly stated.
  */
 
-package org.goblom.cnc.common.permissions;
+package org.goblom.cnc.core.permissions.defaults;
 
 import java.util.ArrayList;
 import java.util.List;
