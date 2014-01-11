@@ -6,13 +6,14 @@
 
 package org.goblom.cnc.core.command;
 
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 /**
  *
  * @author Goblom
  */
-public class CoreCommand extends org.bukkit.command.Command{
+public class CoreCommand extends Command {
 
     private CoreCommandExecutor exe = null;
     

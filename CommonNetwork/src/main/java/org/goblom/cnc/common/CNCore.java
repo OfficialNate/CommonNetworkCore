@@ -8,7 +8,6 @@ package org.goblom.cnc.common;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.java.JavaPlugin;

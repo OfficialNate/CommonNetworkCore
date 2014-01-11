@@ -6,13 +6,15 @@
 
 package org.goblom.cnc.core.network;
 
+import java.util.List;
+
 /**
  *
  * @author Goblom
  */
-public interface User {
+public interface Server {
     String getName();
-    Server getServer();
-    void sendMessage(String message);
-    void sendToServer(String server);
+    String getIP();
+    List<User> getPlayers();
+    Status getStatus();
 }

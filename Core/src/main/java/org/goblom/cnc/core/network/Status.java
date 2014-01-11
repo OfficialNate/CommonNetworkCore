@@ -10,9 +10,6 @@ package org.goblom.cnc.core.network;
  *
  * @author Goblom
  */
-public interface User {
-    String getName();
-    Server getServer();
-    void sendMessage(String message);
-    void sendToServer(String server);
+public enum Status {
+    ONLINE, FULL, OFFLINE;
 }
