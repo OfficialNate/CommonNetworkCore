@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.goblom.cnc.common.network.CNBungeeCord;
 import org.goblom.cnc.common.permissions.CNRankManager;
 import org.goblom.cnc.core.CommonNetwork;
+import org.goblom.cnc.core.Core;
 import org.goblom.cnc.core.command.CoreCommand;
 import org.goblom.cnc.core.command.CoreCommandExecutor;
 import org.goblom.cnc.core.network.Network;
@@ -28,6 +29,10 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
 
     private final RankManager rankManager = new CNRankManager();
     private final Network net = new CNBungeeCord();
+    
+    public void onLoad() { //Might get changed in future
+        Core.setCore(this);
+    }
     
     public RankManager getRankManager() {
         return rankManager;
