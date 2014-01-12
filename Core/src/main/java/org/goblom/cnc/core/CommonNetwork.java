@@ -24,4 +24,5 @@ public interface CommonNetwork {
     Logger getLogger();
     String getVersion();
     String getCoreName();
+    Configuration getConfiguration();
 }
