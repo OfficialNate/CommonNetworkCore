@@ -17,6 +17,7 @@ import org.goblom.cnc.core.CommonNetwork;
 import org.goblom.cnc.core.Core;
 import org.goblom.cnc.core.command.CoreCommand;
 import org.goblom.cnc.core.command.CoreCommandExecutor;
+import org.goblom.cnc.core.listener.BungeeChannelListener;
 import org.goblom.cnc.core.network.Network;
 import org.goblom.cnc.core.permissions.RankManager;
 
@@ -26,12 +27,19 @@ import org.goblom.cnc.core.permissions.RankManager;
  */
 public class CNCore extends JavaPlugin implements CommonNetwork {
 
-    private final RankManager rankManager = new CNRankManager();
-    private final Network net = new CNBungeeCord();
-    
+    @Override
     public void onLoad() { //Might get changed in future
         Core.setCore(this);
     }
+    
+    @Override
+    public void onEnable() {
+        getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new BungeeChannelListener());
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+    }
+    
+    private final RankManager rankManager = new CNRankManager();
+    private final Network net = new CNBungeeCord();
     
     public RankManager getRankManager() {
         return rankManager;
