@@ -7,7 +7,6 @@
 package org.goblom.cnc.core;
 
 import java.util.logging.Logger;
-import org.bukkit.command.CommandMap;
 import org.goblom.cnc.core.command.CoreCommandExecutor;
 import org.goblom.cnc.core.network.Network;
 import org.goblom.cnc.core.permissions.RankManager;
@@ -27,9 +26,9 @@ public class Core {
         cn.registerCommand(command, exe);
     }
     
-    public static CommandMap getCommandMap() {
-        return cn.getCommandMap();
-    }
+//    public static CommandMap getCommandMap() {
+//        return cn.getCommandMap();
+//    }
     
     public static Network getNetwork() {
         return cn.getNetwork();
