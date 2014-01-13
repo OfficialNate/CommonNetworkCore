@@ -42,7 +42,7 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new BungeeChannelListener());
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         
-         net = new CNBungeeCord();
+         net = new CNBungeeCord(this);
          rankManager = new CNRankManager();
          config = new CNConfiguration(this, getConfig());
     }
