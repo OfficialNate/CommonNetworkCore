@@ -18,6 +18,7 @@ import org.goblom.cnc.core.Configuration;
 import org.goblom.cnc.core.Core;
 import org.goblom.cnc.core.command.CoreCommand;
 import org.goblom.cnc.core.command.CoreCommandExecutor;
+import org.goblom.cnc.core.command.database.DatabaseManager;
 import org.goblom.cnc.core.listener.BungeeChannelListener;
 import org.goblom.cnc.core.network.Network;
 import org.goblom.cnc.core.permissions.RankManager;
@@ -36,6 +37,7 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
     private RankManager rankManager;
     private Network net;
     private Configuration config;
+    private DatabaseManager dbManager;
     
     @Override
     public void onEnable() {
@@ -43,8 +45,9 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         
          net = new CNBungeeCord(this);
-         rankManager = new CNRankManager();
          config = new CNConfiguration(this, getConfig());
+         dbManager = new CNDatabaseManager();
+         rankManager = new CNRankManager();
     }
     
     public RankManager getRankManager() {
@@ -95,5 +98,9 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
 
     public Configuration getConfiguration() {
         return config;
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return dbManager;
     }
 }
