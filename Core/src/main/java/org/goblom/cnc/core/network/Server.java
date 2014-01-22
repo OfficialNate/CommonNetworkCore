@@ -6,6 +6,7 @@
 
 package org.goblom.cnc.core.network;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,4 +18,7 @@ public interface Server {
     String getIP();
     List<User> getPlayers();
     Status getStatus();
+    void forward(ForwardMessage forward) throws IOException;
+    void sendMessageToPlayer(String player, String message) throws IOException;
+    int getPlayerCount();
 }

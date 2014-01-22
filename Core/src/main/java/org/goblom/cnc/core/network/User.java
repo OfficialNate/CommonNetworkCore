@@ -15,4 +15,5 @@ public interface User {
     Server getServer();
     void sendMessage(String message);
     void sendToServer(String server);
+    String getIP();
 }
