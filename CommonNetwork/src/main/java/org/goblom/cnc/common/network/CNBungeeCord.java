@@ -8,6 +8,7 @@ package org.goblom.cnc.common.network;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,6 +27,9 @@ public class CNBungeeCord implements Network {
 
     private final CNCore core;
 
+    private static final List<Server> servers = new ArrayList();
+    private static final List<User> users = new ArrayList();
+    
     public CNBungeeCord(CNCore core) {
         this.core = core;
 
@@ -72,12 +76,25 @@ public class CNBungeeCord implements Network {
 
     @Override
     public List<Server> getServers() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return servers;
     }
 
     @Override
     public List<User> getNetworkPlayers() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return users;
     }
 
+    @Override
+    public Server getServer(String serverName) {
+        for (Server server : servers) {
+            if (server.getName().equals(serverName)) {
+                return server;
+            }
+        }
+        return null;
+    }
+    
+    public static void addServer(String serverName, String ip, List<User> users) {
+        servers.add(new CNServer(serverName, ip, users));
+    }
 }

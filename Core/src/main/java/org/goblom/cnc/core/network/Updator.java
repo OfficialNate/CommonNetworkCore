@@ -10,6 +10,6 @@ package org.goblom.cnc.core.network;
  *
  * @author Goblom
  */
-public enum Status {
-    ONLINE, FULL, OFFLINE;
+public interface Updator {
+    void update();
 }

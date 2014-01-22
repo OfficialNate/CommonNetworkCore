@@ -18,5 +18,6 @@ public interface Network {
     boolean send(final String player, String server);
     List<Server> getServers();
     List<User> getNetworkPlayers();
+    Server getServer(String serverName);
 }
 

@@ -17,7 +17,7 @@ public interface Server {
     String getName();
     String getIP();
     List<User> getPlayers();
-    Status getStatus();
+//    Status getStatus();
     void forward(ForwardMessage forward) throws IOException;
     void sendMessageToPlayer(String player, String message) throws IOException;
     int getPlayerCount();

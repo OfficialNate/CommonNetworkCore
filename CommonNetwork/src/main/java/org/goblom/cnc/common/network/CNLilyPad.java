@@ -84,4 +84,9 @@ public class CNLilyPad implements Network {
     public List<User> getNetworkPlayers() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    @Override 
+    public Server getServer(String serverName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
