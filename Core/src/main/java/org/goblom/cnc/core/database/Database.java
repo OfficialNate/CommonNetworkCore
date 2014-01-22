@@ -49,24 +49,10 @@ public class Database {
         getPlugin().getLogger().warning("[CNC Error] ==========================");
     }
 
-    public ResultSet query(String sql) throws ClassNotFoundException, SQLException {
-        ResultSet rs;
-        try (Connection conn = db.connect()) {
-            Statement state = conn.createStatement();
-            rs = state.executeQuery(sql);
-            if (rs == null) {
-                return null;
-            }
-            if (rs.isAfterLast()) {
-                return null;
-            }
-            if (rs.isBeforeFirst()) {
-                rs.next();
-            }
-            state.close();
-            conn.close();
-        }
-        return rs;
+    public ResultSet query(String sql) {
+        ThreadedQuery query = new ThreadedQuery(sql);
+        query.start();
+        return query.getResult();
     }
 
     public String queryString(String sql) {
@@ -82,7 +68,7 @@ public class Database {
                 rs.next();
             }
             return rs.getString(1);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return null;
         }
@@ -101,7 +87,7 @@ public class Database {
                 rs.next();
             }
             return rs.getString(column);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return null;
         }
@@ -120,7 +106,7 @@ public class Database {
                 rs.next();
             }
             return rs.getInt(1);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return null;
         }
@@ -139,7 +125,7 @@ public class Database {
                 rs.next();
             }
             return rs.getInt(column);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return null;
         }
@@ -158,7 +144,7 @@ public class Database {
                 rs.next();
             }
             return rs.getLong(1);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return -1;
         }
@@ -177,7 +163,7 @@ public class Database {
                 rs.next();
             }
             return rs.getLong(column);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return -1;
         }
@@ -196,7 +182,7 @@ public class Database {
                 rs.next();
             }
             return rs.getFloat(1);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return -1;
         }
@@ -215,7 +201,7 @@ public class Database {
                 rs.next();
             }
             return rs.getFloat(column);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return -1;
         }
@@ -234,7 +220,7 @@ public class Database {
                 rs.next();
             }
             return rs.getDouble(1);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return -1;
         }
@@ -253,7 +239,7 @@ public class Database {
                 rs.next();
             }
             return rs.getDouble(column);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return -1;
         }
@@ -272,7 +258,7 @@ public class Database {
                 rs.next();
             }
             return rs.getBoolean(1);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return false;
         }
@@ -291,7 +277,7 @@ public class Database {
                 rs.next();
             }
             return rs.getBoolean(column);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return false;
         }
@@ -323,7 +309,7 @@ public class Database {
                 rs.next();
             }
             return rs.getInt(1) != 0;
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return false;
         }
@@ -343,7 +329,7 @@ public class Database {
                 rs.next();
             }
             return rs.getInt(1) != 0;
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return false;
         }
@@ -363,7 +349,7 @@ public class Database {
                 rs.next();
             }
             return (rs.getInt(1) != 0);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return false;
         }
@@ -379,7 +365,7 @@ public class Database {
             while (rs.next()) {
                 list.add(rs.getString(1));
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return null;
         }
@@ -396,7 +382,7 @@ public class Database {
             while (rs.next()) {
                 list.add(rs.getString(column));
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return null;
         }
@@ -411,7 +397,7 @@ public class Database {
                 return -1;
             }
             return rs.getInt("Count(*)");
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             log(sql, ex);
             return null;
         }
@@ -427,6 +413,40 @@ public class Database {
         } catch (ClassNotFoundException | SQLException ex) {
             log(sql, ex);
             return false;
+        }
+    }
+    
+    private class ThreadedQuery extends Thread {
+        private ResultSet rs = null;
+        private final String sql;
+        
+        private ThreadedQuery(String sql) {
+            this.sql = sql;
+        }
+        
+        @Override
+        public void run() {
+            try (Connection conn = db.connect()) {
+                Statement state = conn.createStatement();
+                this.rs = state.executeQuery(sql);
+                if (rs == null) {
+                    return;
+                }
+                if (rs.isAfterLast()) {
+                    return;
+                }
+                if (rs.isBeforeFirst()) {
+                    rs.next();
+                }
+                state.close();
+                conn.close();
+            } catch (ClassNotFoundException | SQLException ex) {
+                log(sql, ex);
+            }
+        }
+        
+        public ResultSet getResult() {
+            return rs;
         }
     }
 }
