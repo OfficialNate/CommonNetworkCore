@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.goblom.cnc.common.util.ItemSerialization;
 import org.goblom.cnc.core.Core;
-import org.goblom.cnc.core.command.database.Database;
+import org.goblom.cnc.core.database.Database;
 import org.goblom.cnc.core.features.Feature;
 
 /**

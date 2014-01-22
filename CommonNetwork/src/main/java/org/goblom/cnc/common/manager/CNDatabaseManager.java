@@ -9,9 +9,9 @@ package org.goblom.cnc.common.manager;
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.plugin.Plugin;
-import org.goblom.cnc.core.command.database.Database;
-import org.goblom.cnc.core.command.database.DatabaseManager;
-import org.goblom.cnc.core.command.database.type.SQLDatabase;
+import org.goblom.cnc.core.database.Database;
+import org.goblom.cnc.core.database.DatabaseManager;
+import org.goblom.cnc.core.database.type.SQLDatabase;
 
 /**
  *

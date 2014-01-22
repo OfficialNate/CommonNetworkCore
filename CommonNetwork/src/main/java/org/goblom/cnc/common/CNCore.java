@@ -20,7 +20,7 @@ import org.goblom.cnc.core.Configuration;
 import org.goblom.cnc.core.Core;
 import org.goblom.cnc.core.command.CoreCommand;
 import org.goblom.cnc.core.command.CoreCommandExecutor;
-import org.goblom.cnc.core.command.database.DatabaseManager;
+import org.goblom.cnc.core.database.DatabaseManager;
 import org.goblom.cnc.core.features.FeatureManager;
 import org.goblom.cnc.core.listener.BungeeChannelListener;
 import org.goblom.cnc.core.network.Network;

@@ -12,7 +12,7 @@ import org.goblom.cnc.common.util.dbi.MySQL;
 import org.goblom.cnc.common.util.dbi.PostgreSQL;
 import org.goblom.cnc.common.util.dbi.SQLite;
 import org.goblom.cnc.core.Core;
-import org.goblom.cnc.core.command.database.type.SQLDatabase;
+import org.goblom.cnc.core.database.type.SQLDatabase;
 
 /**
  *

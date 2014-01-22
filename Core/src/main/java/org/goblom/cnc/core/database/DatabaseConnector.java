@@ -4,7 +4,7 @@
  * All Rights Reserved unless otherwise explicitly stated.
  */
 
-package org.goblom.cnc.core.command.database;
+package org.goblom.cnc.core.database;
 
 import java.io.File;
 

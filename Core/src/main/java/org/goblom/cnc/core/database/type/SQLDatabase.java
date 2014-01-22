@@ -3,7 +3,7 @@
  *
  * All Rights Reserved unless otherwise explicitly stated.
  */
-package org.goblom.cnc.core.command.database.type;
+package org.goblom.cnc.core.database.type;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,8 +11,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import org.goblom.cnc.core.command.database.DatabaseConnector;
-import org.goblom.cnc.core.command.database.DatabaseType;
+import org.goblom.cnc.core.database.DatabaseConnector;
+import org.goblom.cnc.core.database.DatabaseType;
 
 /**
  *

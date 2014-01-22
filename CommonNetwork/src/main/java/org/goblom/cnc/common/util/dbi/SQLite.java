@@ -10,8 +10,8 @@ import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.goblom.cnc.core.Core;
-import org.goblom.cnc.core.command.database.DatabaseConnector;
-import org.goblom.cnc.core.command.database.DatabaseType;
+import org.goblom.cnc.core.database.DatabaseConnector;
+import org.goblom.cnc.core.database.DatabaseType;
 
 /**
  *
