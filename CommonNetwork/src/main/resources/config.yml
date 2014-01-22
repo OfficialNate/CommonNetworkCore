@@ -1,0 +1,7 @@
+Database:
+  Type: MySQL
+  Host: "localhost"
+  Port: 3306
+  Name: "commonnetworkcore"
+  Username: "root"
+  Password: ""

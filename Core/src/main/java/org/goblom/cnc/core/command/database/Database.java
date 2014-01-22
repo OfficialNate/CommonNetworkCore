@@ -45,10 +45,10 @@ public class Database {
         getPlugin().getLogger().warning("[CNC Error] ---> " + sqlStatement);
         getPlugin().getLogger().warning("[CNC Error] ==========================");
         getPlugin().getLogger().warning("[CNC Error] StackTrace");
-                                        ex.printStackTrace();
+        ex.printStackTrace();
         getPlugin().getLogger().warning("[CNC Error] ==========================");
     }
-    
+
     public ResultSet query(String sql) throws ClassNotFoundException, SQLException {
         ResultSet rs;
         try (Connection conn = db.connect()) {
@@ -66,6 +66,25 @@ public class Database {
             conn.close();
         }
         return rs;
+    }
+
+    public String queryString(String sql) {
+        try {
+            ResultSet rs = query(sql);
+            if (rs == null) {
+                return null;
+            }
+            if (rs.isAfterLast()) {
+                return null;
+            }
+            if (rs.isBeforeFirst()) {
+                rs.next();
+            }
+            return rs.getString(1);
+        } catch (ClassNotFoundException | SQLException ex) {
+            log(sql, ex);
+            return null;
+        }
     }
 
     public String queryString(String sql, String column) {
@@ -201,6 +220,44 @@ public class Database {
         }
     }
 
+    public double queryDouble(String sql) {
+        try {
+            ResultSet rs = query(sql);
+            if (rs == null) {
+                return -1;
+            }
+            if (rs.isAfterLast()) {
+                return -1;
+            }
+            if (rs.isBeforeFirst()) {
+                rs.next();
+            }
+            return rs.getDouble(1);
+        } catch (ClassNotFoundException | SQLException ex) {
+            log(sql, ex);
+            return -1;
+        }
+    }
+
+    public double queryDouble(String sql, String column) {
+        try {
+            ResultSet rs = query(sql);
+            if (rs == null) {
+                return -1;
+            }
+            if (rs.isAfterLast()) {
+                return -1;
+            }
+            if (rs.isBeforeFirst()) {
+                rs.next();
+            }
+            return rs.getDouble(column);
+        } catch (ClassNotFoundException | SQLException ex) {
+            log(sql, ex);
+            return -1;
+        }
+    }
+
     public boolean queryBoolean(String sql) {
         try {
             ResultSet rs = query(sql);
@@ -239,10 +296,15 @@ public class Database {
         }
     }
 
-    public int update(String sql) throws SQLException, ClassNotFoundException {
-        try (Connection conn = db.connect()) {
+    public boolean update(String sql) {
+        try {
+            Connection conn = db.connect();
             Statement state = conn.createStatement();
-            return state.executeUpdate(sql);
+            state.executeUpdate(sql);
+            return true;
+        } catch (ClassNotFoundException | SQLException ex) {
+            log(sql, ex);
+            return false;
         }
     }
 
@@ -351,6 +413,19 @@ public class Database {
         } catch (ClassNotFoundException | SQLException ex) {
             log(sql, ex);
             return null;
+        }
+    }
+
+    public boolean createTable(String tableName, String columns) {
+        String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(" + columns + ");";
+        try {
+            Connection conn = db.connect();
+            Statement state = conn.createStatement();
+            state.executeUpdate(sql);
+            return true;
+        } catch (ClassNotFoundException | SQLException ex) {
+            log(sql, ex);
+            return false;
         }
     }
 }

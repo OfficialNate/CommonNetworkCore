@@ -8,8 +8,6 @@ package org.goblom.cnc.common;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.goblom.cnc.core.Configuration;
 
@@ -36,8 +34,9 @@ public class CNConfiguration implements Configuration {
     }
 
     public void save() {
-        try {
-            config.save(getFile());
-        } catch (IOException e) { e.printStackTrace(); }
+        core.saveConfig();
+//        try {
+//            config.save(getFile());
+//        } catch (IOException e) { e.printStackTrace(); }
     }
 }

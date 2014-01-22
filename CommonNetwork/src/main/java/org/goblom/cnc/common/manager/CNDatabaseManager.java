@@ -4,7 +4,7 @@
  * All Rights Reserved unless otherwise explicitly stated.
  */
 
-package org.goblom.cnc.common;
+package org.goblom.cnc.common.manager;
 
 import java.util.HashMap;
 import java.util.Map;

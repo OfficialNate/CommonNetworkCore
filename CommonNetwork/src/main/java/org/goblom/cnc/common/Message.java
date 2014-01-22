@@ -27,4 +27,8 @@ public enum Message {
     public static String getMessage(Message message) {
         return message.getMessage();
     }
+    
+    public static String stripColor(String message) {
+        return ChatColor.stripColor(message);
+    }
 }

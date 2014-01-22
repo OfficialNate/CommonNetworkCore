@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import org.goblom.cnc.core.command.database.Database;
 import org.goblom.cnc.core.command.database.DatabaseConnector;
 import org.goblom.cnc.core.command.database.DatabaseType;
 

@@ -6,19 +6,22 @@
 
 package org.goblom.cnc.common;
 
+import org.goblom.cnc.common.manager.CNDatabaseManager;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.goblom.cnc.common.manager.CNFeatureManager;
 import org.goblom.cnc.common.network.CNBungeeCord;
-import org.goblom.cnc.common.permissions.CNRankManager;
+import org.goblom.cnc.common.manager.CNRankManager;
 import org.goblom.cnc.core.CommonNetwork;
 import org.goblom.cnc.core.Configuration;
 import org.goblom.cnc.core.Core;
 import org.goblom.cnc.core.command.CoreCommand;
 import org.goblom.cnc.core.command.CoreCommandExecutor;
 import org.goblom.cnc.core.command.database.DatabaseManager;
+import org.goblom.cnc.core.features.FeatureManager;
 import org.goblom.cnc.core.listener.BungeeChannelListener;
 import org.goblom.cnc.core.network.Network;
 import org.goblom.cnc.core.permissions.RankManager;
@@ -38,16 +41,21 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
     private Network net;
     private Configuration config;
     private DatabaseManager dbManager;
+    private FeatureManager featureManager;
     
     @Override
     public void onEnable() {
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new BungeeChannelListener());
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         
+         saveDefaultConfig();
+         
          net = new CNBungeeCord(this);
          config = new CNConfiguration(this, getConfig());
          dbManager = new CNDatabaseManager();
          rankManager = new CNRankManager();
+         featureManager = new CNFeatureManager();
+         new CNRegisters(this);
     }
     
     public RankManager getRankManager() {
@@ -102,5 +110,9 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
 
     public DatabaseManager getDatabaseManager() {
         return dbManager;
+    }
+    
+    public FeatureManager getFeatureManager() {
+        return featureManager;
     }
 }

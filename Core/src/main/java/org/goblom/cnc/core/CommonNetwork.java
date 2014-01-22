@@ -9,6 +9,7 @@ package org.goblom.cnc.core;
 import java.util.logging.Logger;
 import org.goblom.cnc.core.command.CoreCommandExecutor;
 import org.goblom.cnc.core.command.database.DatabaseManager;
+import org.goblom.cnc.core.features.FeatureManager;
 import org.goblom.cnc.core.network.Network;
 import org.goblom.cnc.core.permissions.RankManager;
 
@@ -25,5 +26,6 @@ public interface CommonNetwork {
     String getVersion();
     String getCoreName();
     Configuration getConfiguration();
-    DatabaseManager getDatabaseManager(); 
+    DatabaseManager getDatabaseManager();
+    FeatureManager getFeatureManager();
 }
