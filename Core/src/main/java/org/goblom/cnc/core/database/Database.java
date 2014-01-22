@@ -63,6 +63,7 @@ public class Database {
             if (rs.isBeforeFirst()) {
                 rs.next();
             }
+            state.close();
             conn.close();
         }
         return rs;
