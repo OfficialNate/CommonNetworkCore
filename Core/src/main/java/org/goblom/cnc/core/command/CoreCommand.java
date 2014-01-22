@@ -25,6 +25,7 @@ public class CoreCommand extends Command {
         this.exe = exe;
     }
     
+    @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         if (exe != null) {
             exe.onCommand(sender, this, label, args);

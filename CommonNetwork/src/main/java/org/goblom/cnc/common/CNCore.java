@@ -58,10 +58,12 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
          new CNRegisters(this);
     }
     
+    @Override
     public RankManager getRankManager() {
         return rankManager;
     }
 
+    @Override
     public void registerCommand(String command, CoreCommandExecutor exe) {
         CoreCommand cmd = new CoreCommand(command);
         if (exe.getAlias() != null && exe.getAlias() != "") {
@@ -83,7 +85,7 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
         cmd.setExecutor(exe);
     }
 
-    public CommandMap getCommandMap() {
+    private CommandMap getCommandMap() {
         try {
             final Field f = Bukkit.getServer().getClass().getDeclaredField("commandMap");
             f.setAccessible(true);
@@ -92,26 +94,32 @@ public class CNCore extends JavaPlugin implements CommonNetwork {
         return getCommandMap();
     }
     
+    @Override
     public Network getNetwork() {
         return net; //Only support BungeeCord for now
     }
 
+    @Override
     public String getVersion() {
         return getDescription().getVersion();
     }
     
+    @Override
     public String getCoreName() {
         return getDescription().getName();
     }
 
+    @Override
     public Configuration getConfiguration() {
         return config;
     }
 
+    @Override
     public DatabaseManager getDatabaseManager() {
         return dbManager;
     }
     
+    @Override
     public FeatureManager getFeatureManager() {
         return featureManager;
     }

@@ -7,7 +7,6 @@
 package org.goblom.cnc.common;
 
 import java.io.File;
-import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.goblom.cnc.core.Configuration;
 
@@ -25,14 +24,17 @@ public class CNConfiguration implements Configuration {
         this.config = config;
     }
 
+    @Override
     public FileConfiguration getFileConfiguration() {
         return config;
     }
 
+    @Override
     public File getFile() {
         return new File(core.getDataFolder() + File.separator + "config.yml");
     }
 
+    @Override
     public void save() {
         core.saveConfig();
 //        try {

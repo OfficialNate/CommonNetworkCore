@@ -7,11 +7,11 @@ package org.goblom.cnc.common.network;
 
 import java.util.List;
 import lilypad.client.connect.api.Connect;
+import lilypad.client.connect.api.request.RequestException;
 import lilypad.client.connect.api.request.impl.RedirectRequest;
 import lilypad.client.connect.api.result.FutureResultListener;
 import lilypad.client.connect.api.result.StatusCode;
 import lilypad.client.connect.api.result.impl.RedirectResult;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.goblom.cnc.common.CNCore;
 import org.goblom.cnc.core.network.Network;
@@ -32,6 +32,7 @@ public class CNLilyPad implements Network {
         this.lilyPadConnect = (Connect) core.getServer().getServicesManager().getRegistration(Connect.class).getProvider();
     }
 
+    @Override
     public boolean send(final Player player, final String server) {
         if (server.length() == 0) { return false; }
         
@@ -45,19 +46,21 @@ public class CNLilyPad implements Network {
                         }
                     }
             );
-        } catch (Exception e) {
+        } catch (RequestException e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
 
+    @Override
     public boolean send(String player, String server) {
                 if (server.length() == 0) { return false; }
         
         try {
             lilyPadConnect.request(new RedirectRequest(server, player)).registerListener(
                     new FutureResultListener<RedirectResult>() {
+                        @Override
                         public void onResult(RedirectResult result) {
                             if (result.getStatusCode().equals(StatusCode.SUCCESS)) {
 //                                return true;
@@ -65,17 +68,19 @@ public class CNLilyPad implements Network {
                         }
                     }
             );
-        } catch (Exception e) {
+        } catch (RequestException e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
 
+    @Override
     public List<Server> getServers() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public List<User> getNetworkPlayers() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

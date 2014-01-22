@@ -20,7 +20,6 @@ import org.goblom.cnc.core.permissions.RankManager;
 public interface CommonNetwork {
     RankManager getRankManager();
     void registerCommand(String command, CoreCommandExecutor exe);
-//    CommandMap getCommandMap();
     Network getNetwork();
     Logger getLogger();
     String getVersion();

@@ -28,10 +28,6 @@ public class Core {
         cn.registerCommand(command, exe);
     }
     
-//    public static CommandMap getCommandMap() {
-//        return cn.getCommandMap();
-//    }
-    
     public static Network getNetwork() {
         return cn.getNetwork();
     }

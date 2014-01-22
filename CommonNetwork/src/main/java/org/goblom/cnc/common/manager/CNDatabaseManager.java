@@ -21,6 +21,7 @@ public class CNDatabaseManager implements DatabaseManager {
 
     private final Map<String, Database> registered = new HashMap();
     
+    @Override
     public boolean registerDatabase(Plugin plugin, SQLDatabase sql) {
         if (!registered.containsKey(plugin.getName())) {
             registered.put(plugin.getName(), new Database(plugin, sql));
@@ -29,6 +30,7 @@ public class CNDatabaseManager implements DatabaseManager {
         return false;
     }
 
+    @Override
     public Database getDatabase(Plugin plugin) {
         Database db = null;
         for (String string : registered.keySet()) {

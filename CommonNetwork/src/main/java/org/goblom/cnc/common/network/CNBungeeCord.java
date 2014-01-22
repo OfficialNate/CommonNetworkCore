@@ -7,6 +7,7 @@ package org.goblom.cnc.common.network;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -34,6 +35,7 @@ public class CNBungeeCord implements Network {
         }
     }
 
+    @Override
     public boolean send(Player player, String server) {
         try {
             if (server.length() == 0) {
@@ -48,10 +50,11 @@ public class CNBungeeCord implements Network {
             out.writeUTF(server);
 
             player.sendPluginMessage(core, "BungeeCord", byteArray.toByteArray());
-        } catch (Exception e) { return false; }
+        } catch (IOException e) { return false; }
         return true;
     }
 
+    @Override
     public boolean send(String player, String server) {
         try {
             if (server.length() == 0) { return false; }
@@ -63,14 +66,16 @@ public class CNBungeeCord implements Network {
             out.writeUTF(server);
 
             Bukkit.getOnlinePlayers()[0].sendPluginMessage(core, "BungeeCord", byteArray.toByteArray());
-        } catch (Exception e) { return false; }
+        } catch (IOException e) { return false; }
         return true;
     }
 
+    @Override
     public List<Server> getServers() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public List<User> getNetworkPlayers() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

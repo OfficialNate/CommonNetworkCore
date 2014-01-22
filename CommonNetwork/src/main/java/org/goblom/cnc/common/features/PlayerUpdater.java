@@ -59,20 +59,22 @@ public class PlayerUpdater implements Feature {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        player.getInventory().setContents(getInventory(player).getContents());
-        player.getEnderChest().setContents(getEnderChest(player).getContents());
-        player.teleport(getLocation(player));
-        player.setLevel(getLevel(player));
-        player.setExp(getExp(player));
-        player.setExhaustion(getExhaustion(player));
-        player.setFoodLevel(getFood(player));
-        player.setHealthScale(getHealthScale(player));
-        player.setHealth(getHealth(player));
-        player.setSaturation(getSaturation(player));
+        if (doesContain(player)) {
+            player.getInventory().setContents(getInventory(player).getContents());
+            player.getEnderChest().setContents(getEnderChest(player).getContents());
+            player.teleport(getLocation(player));
+            player.setLevel(getLevel(player));
+            player.setExp(getExp(player));
+            player.setExhaustion(getExhaustion(player));
+            player.setFoodLevel(getFood(player));
+            player.setHealthScale(getHealthScale(player));
+            player.setHealth(getHealth(player));
+            player.setSaturation(getSaturation(player));
+        }
     }
     
     //SQL Statements
-    private boolean doesContains(Player player) {
+    private boolean doesContain(Player player) {
         return get().doesTableContain("PlayerLogger", "player", player.getName());
     }
     
