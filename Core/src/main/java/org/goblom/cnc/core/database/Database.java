@@ -29,7 +29,7 @@ public class Database {
         this.pluginName = plugin.getName();
     }
 
-    private SQLDatabase getDatabase() {
+    public SQLDatabase getDatabase() {
         return db;
     }
 
