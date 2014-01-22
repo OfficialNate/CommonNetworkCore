@@ -49,7 +49,7 @@ public class Database {
         getPlugin().getLogger().warning("[CNC Error] ==========================");
     }
 
-    synchronized ResultSet query(String sql) {
+    public ResultSet query(String sql) {
         ThreadedQuery query = new ThreadedQuery(sql);
         query.start();
         return query.getResult();
