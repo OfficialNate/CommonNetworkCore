@@ -6,6 +6,7 @@
 
 package org.goblom.cnc.core.listener;
 
+import org.goblom.cnc.core.events.CoreListener;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;

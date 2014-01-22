@@ -4,7 +4,7 @@
  * All Rights Reserved unless otherwise explicitly stated.
  */
 
-package org.goblom.cnc.core.listener;
+package org.goblom.cnc.core.events;
 
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
